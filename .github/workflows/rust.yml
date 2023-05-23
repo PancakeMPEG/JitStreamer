@@ -16,10 +16,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build them files for x86_64-unknown-linux-gnu
-      run: RUSTFLAGS="-C target-feature=+crt-static" cargo build --target x86_64-unknown-linux-gnu --release --verbose
+    - name: Run build.sh script
+      run: |
+          chmod +x Build-Ubuntu.sh
+          ./Build-Ubuntu.sh
+   # - name: Build them files for x86_64-unknown-linux-gnu
+   #  run: RUSTFLAGS="-C target-feature=+crt-static" cargo build --target x86_64-unknown-linux-gnu --release --verbose
     - name: Assemble the files like the Avengers
-      run: mkdir output && mv target/x86_64-unknown-linux-gnu/release/jit_streamer output/jit_streamer-x86_64-unknown-linux-gnu && mv target/x86_64-unknown-linux-gnu/release/pair output/pair-x86_64-unknown-linux-gnu
+      run: mkdir output && mv target/release/jit_streamer output/jit_streamer-x86_64-unknown-linux-gnu && mv target/release/pair output/pair-x86_64-unknown-linux-gnu
     - name: Yeet them to the cloud
       uses: actions/upload-artifact@v3.1.0
       with:
