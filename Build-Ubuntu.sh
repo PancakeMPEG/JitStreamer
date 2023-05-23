@@ -54,7 +54,7 @@ cd ./build/libimobiledevice && git checkout 963083b \
 cd ../../
 echo "${BLUE}[*] Cloning GitHub Projects (usbmuxd)${NC}"
 git clone https://github.com/libimobiledevice/usbmuxd ./build/usbmuxd 
-cd ./build/usbmuxd && git checkout d0cda19 \ 
+cd ./build/usbmuxd && git checkout d0cda19 \
 && ./autogen.sh && sudo make install 
 cd ../../
 echo "${BLUE}[*] Cloning GitHub Projects (JitStreamer)${NC}"
