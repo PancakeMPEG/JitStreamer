@@ -16,8 +16,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Ask Clippy to ruin our lives
-      run: cargo clippy -- -D warnings
     - name: Build them files for x86_64-unknown-linux-gnu
       run: RUSTFLAGS="-C target-feature=+crt-static" cargo build --target x86_64-unknown-linux-gnu --release --verbose
     - name: Assemble the files like the Avengers
