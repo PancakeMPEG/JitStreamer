@@ -54,7 +54,7 @@ cd ./build/libimobiledevice && git checkout 963083b \
 cd ../../
 echo "${BLUE}[*] Cloning GitHub Projects (usbmuxd)${NC}"
 git clone https://github.com/libimobiledevice/usbmuxd ./build/usbmuxd 
-cd ./build/usbmuxd && git checkout d0cda19 \
+cd ./build/usbmuxd && git checkout d0cda19 \ 
 && ./autogen.sh && sudo make install 
 cd ../../
 echo "${BLUE}[*] Cloning GitHub Projects (JitStreamer)${NC}"
@@ -63,16 +63,15 @@ cd ./build/JitStreamer && git checkout c2fda05
 echo "${BLUE}[*] Building JitStreamer${NC}"
 sed -i 's/,\?\s*"vendored"//g' Cargo.toml \
 && cargo build --release \
-&& echo "${BLUE}[*] Move JitStreamer Binary${NC}" \
-&& mv ./target/release/jit_streamer ../../JitStreamer \
+&& echo "${BLUE}[*] Copy JitStreamer Binary${NC}" \
+&& cp ./target/release/jit_streamer ../../JitStreamer \
 && echo "${BLUE}[*] Cleaning Build Cache${NC}" \
 && cd ../../
 echo "${RED}Are you sure you want to delete build file? ${NC}(y/n)"
-read answer
 
-if [ "$answer" = "y" ]; then
+if read -t 5 -r confirmation && [[ $confirmation == [yY] ]]; then
     sudo rm -r ./build
-    echo "Deleted successfully."
+    echo "Build file deleted."
 else
     echo "Deletion cancelled."
 fi
